@@ -1,0 +1,335 @@
+/* RESET & BASIC STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow: hidden;
+    background: #050505;
+    font-family: 'Outfit', sans-serif;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    touch-action: none; /* Mencegah gesture browser seperti pull-to-refresh */
+    overscroll-behavior: none; /* Mencegah efek bounce saat scroll */
+}
+
+body {
+    perspective: 1200px; /* Perspective for 3D falling rain */
+}
+
+/* ── LOADING SCREEN ── */
+#loading {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #050505;
+    z-index: 999;
+    transition: opacity 1.5s ease, filter 1.5s ease, transform 1.5s ease;
+    gap: 16px;
+}
+
+#loading.out {
+    opacity: 0;
+    filter: blur(16px);
+    transform: scale(1.06);
+    pointer-events: none;
+}
+
+.loading-text {
+    color: #ff6eb4;
+    letter-spacing: 10px;
+    font-weight: 100;
+    font-size: 13px;
+    text-shadow: 0 0 12px #ff6eb4;
+}
+
+.load-icon {
+    font-size: 30px;
+    color: #ff6eb4;
+    filter: drop-shadow(0 0 8px #ff6eb4);
+    animation: loadIconPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loadIconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+}
+
+.bar {
+    width: 180px;
+    height: 1px;
+    background: #1a1a1a;
+    overflow: hidden;
+}
+
+.bar span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: #ff6eb4;
+    animation: load 4.2s forwards;
+    box-shadow: 0 0 8px #ff6eb4;
+}
+
+@keyframes load {
+    to { width: 100%; }
+}
+
+.load-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.load-dots span {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #ff6eb4;
+    animation: dotb 1.2s ease-in-out infinite;
+}
+
+.load-dots span:nth-child(2) { animation-delay: .2s; }
+.load-dots span:nth-child(3) { animation-delay: .4s; }
+
+@keyframes dotb {
+    0%, 100% { opacity: .2; transform: scale(.8); }
+    50% { opacity: 1; transform: scale(1.3); }
+}
+
+
+/* ── 3D SCENE & BACKGROUND ── */
+#scene {
+    position: fixed;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    transform-style: preserve-3d;
+}
+
+#scene.visible {
+    opacity: 1;
+}
+
+#bg {
+    position: absolute;
+    inset: 0;
+    background: #050505;
+}
+
+#vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,5,.78) 100%);
+    pointer-events: none;
+    z-index: 5;
+}
+
+
+/* ── FALLING TEXT (Hujan Teks) ── */
+.text {
+    position: absolute;
+    font-weight: 100;
+    white-space: nowrap;
+    animation: fall3d linear infinite;
+    pointer-events: none;
+    z-index: 2;
+    transition: color 1.5s ease, text-shadow 1.5s ease;
+}
+
+@keyframes fall3d {
+    from { transform: translateY(-100px) translateZ(var(--tz)) rotateY(var(--ry)); }
+    to { transform: translateY(115vh) translateZ(var(--tz)) rotateY(var(--ry)); }
+}
+
+
+/* ── FALLING PHOTOS (Hujan Foto) ── */
+.photo {
+    position: absolute;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.14);
+    animation: fall3d linear infinite;
+    z-index: 3;
+    transition: box-shadow 1.5s ease, border-color 1.5s ease, transform 0.3s ease;
+}
+
+.photo:hover {
+    transform: scale(1.25) !important; /* Efek membesar saat di-hover */
+    z-index: 10;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* ── MUSIC BUTTON ── */
+#musicBtn {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    z-index: 100;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(5,5,5,.7);
+    border: 1px solid rgba(255,110,180,.4);
+    color: #ff6eb4;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    box-shadow: 0 0 12px rgba(255,110,180,.25);
+    transition: color 1.5s ease, border-color 1.5s ease, box-shadow 1.5s ease, transform .2s;
+}
+
+#musicBtn:hover {
+    transform: scale(1.12);
+}
+
+
+/* ── MUSIC PANEL ── */
+#musicPanel {
+    position: fixed;
+    bottom: 62px;
+    right: 18px;
+    z-index: 100;
+    background: rgba(5,5,5,.75);
+    border: 1px solid rgba(255,110,180,.25);
+    border-radius: 16px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    box-shadow: 0 0 20px rgba(255,110,180,.15);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity .25s ease, transform .25s ease;
+    min-width: 150px;
+}
+
+#musicPanel.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+}
+
+.panel-label {
+    font-size: 8px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,.25);
+    font-weight: 100;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.panel-label i { font-size: 9px; }
+
+.panel-btns {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+}
+
+.pbtn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,110,180,.35);
+    background: rgba(255,110,180,.08);
+    color: #ff6eb4;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    transition: all .2s;
+}
+
+.pbtn:hover {
+    background: rgba(255,110,180,.24);
+    box-shadow: 0 0 10px rgba(255,110,180,.5);
+    transform: scale(1.1);
+}
+
+.vol-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.vol-row i {
+    font-size: 9px;
+    color: rgba(255,255,255,.3);
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    height: 1.5px;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    background: rgba(255,110,180,.4);
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+}
+
+/* ── RESPONSIVE STYLES (MOBILE) ── */
+@media (max-width: 768px) {
+    body {
+        perspective: 800px; /* Kurangi perspektif 3D agar objek tidak terlalu besar di layar kecil */
+    }
+    
+    #musicPanel {
+        bottom: 56px;
+        right: 12px;
+        min-width: 130px;
+        padding: 10px;
+    }
+    
+    #musicBtn {
+        bottom: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .loading-text {
+        font-size: 11px;
+        letter-spacing: 6px;
+    }
+
+    .load-icon {
+        font-size: 24px;
+    }
+    
+    .bar {
+        width: 140px;
+    }
+    
+    .photo:hover {
+        transform: scale(1.15) !important; /* Kurangi efek membesar di layar kecil agar tidak rusak */
+    }
+}
+

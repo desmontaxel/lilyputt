@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Romantic Aesthetic</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- LOADING SCREEN -->
+    <div id="loading">
+        <div class="load-icon"><i class="fa-solid fa-heart"></i></div>
+        <div class="loading-text">LOADING MEMORIES</div>
+        <div class="bar"><span></span></div>
+        <div class="load-dots"><span></span><span></span><span></span></div>
+    </div>
+
+    <!-- 3D SCENE -->
+    <div id="scene">
+        <div id="bg"></div>
+        <div id="vignette"></div>
+    </div>
+
+    <!-- MUSIC BUTTON -->
+    <div id="musicBtn" title="Music"><i class="fa-solid fa-music" id="musicIcon"></i></div>
+
+    <!-- MUSIC PANEL -->
+    <div id="musicPanel">
+        <div class="panel-label"><i class="fa-solid fa-music"></i> NOW PLAYING</div>
+        <div class="panel-btns">
+            <button class="pbtn" id="btnPlay"><i class="fa-solid fa-play" id="playIcon"></i></button>
+            <button class="pbtn" id="btnMute"><i class="fa-solid fa-volume-high" id="muteIcon"></i></button>
+            <button class="pbtn" id="btnLoop"><i class="fa-solid fa-repeat"></i></button>
+        </div>
+        <div class="vol-row">
+            <i class="fa-solid fa-volume-low"></i>
+            <input type="range" id="volSlider" min="0" max="100" value="50">
+            <i class="fa-solid fa-volume-high"></i>
+        </div>
+    </div>
+
+    <!-- BACKGROUND AUDIO -->
+    <audio id="bgAudio" loop>
+        <!-- Memanggil file musik yang sudah Anda siapkan -->
+        <source src="music/The%20One%20That%20Got%20Away.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
