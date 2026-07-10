@@ -1,4 +1,9 @@
 /* RESET & BASIC STYLES */
+:root {
+    --g-color: #ff6eb4;
+    --g-rgb: 255, 110, 180;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -119,7 +124,8 @@ body {
 #bg {
     position: absolute;
     inset: 0;
-    background: #050505;
+    background: radial-gradient(ellipse 70% 60% at 30% 40%, rgba(var(--g-rgb),.1), transparent), radial-gradient(ellipse 50% 70% at 70% 60%, rgba(var(--g-rgb),.06), transparent), #050505;
+    transition: background 1.5s ease;
 }
 
 #vignette {
@@ -139,7 +145,9 @@ body {
     animation: fall3d linear infinite;
     pointer-events: none;
     z-index: 2;
-    transition: color 1.5s ease, text-shadow 1.5s ease;
+    color: var(--g-color);
+    text-shadow: 0 0 8px var(--g-color);
+    will-change: transform;
 }
 
 @keyframes fall3d {
@@ -154,10 +162,12 @@ body {
     border-radius: 16px;
     overflow: hidden;
     background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.14);
+    border: 1px solid rgba(var(--g-rgb), .33);
+    box-shadow: 0 0 14px rgba(var(--g-rgb), .27);
     animation: fall3d linear infinite;
     z-index: 3;
-    transition: box-shadow 1.5s ease, border-color 1.5s ease, transform 0.3s ease;
+    transition: transform 0.3s ease;
+    will-change: transform;
 }
 
 .photo:hover {
@@ -182,15 +192,15 @@ body {
     height: 36px;
     border-radius: 50%;
     background: rgba(5,5,5,.7);
-    border: 1px solid rgba(255,110,180,.4);
-    color: #ff6eb4;
+    border: 1px solid rgba(var(--g-rgb), .45);
+    color: var(--g-color);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 13px;
-    box-shadow: 0 0 12px rgba(255,110,180,.25);
-    transition: color 1.5s ease, border-color 1.5s ease, box-shadow 1.5s ease, transform .2s;
+    box-shadow: 0 0 12px rgba(var(--g-rgb), .25);
+    transition: transform .2s;
 }
 
 #musicBtn:hover {
@@ -295,6 +305,20 @@ input[type=range]::-webkit-slider-thumb {
     cursor: pointer;
 }
 
+/* ── FOOTER COPYRIGHT ── */
+#footer {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 11px;
+    letter-spacing: 2px;
+    pointer-events: none;
+    text-align: center;
+}
+
 /* ── RESPONSIVE STYLES (MOBILE) ── */
 @media (max-width: 768px) {
     body {
@@ -330,6 +354,11 @@ input[type=range]::-webkit-slider-thumb {
     
     .photo:hover {
         transform: scale(1.15) !important; /* Kurangi efek membesar di layar kecil agar tidak rusak */
+    }
+
+    #footer {
+        font-size: 9px;
+        bottom: 16px;
     }
 }
 

@@ -27,28 +27,9 @@ function applyGlobalColor() {
     const g = parseInt(color.slice(3, 5), 16) || 110;
     const b = parseInt(color.slice(5, 7), 16) || 180;
 
-    // Apply color to floating text
-    document.querySelectorAll('.text').forEach(el => {
-        el.style.color = color;
-        el.style.textShadow = `0 0 8px ${color}`;
-    });
-
-    // Apply color border/shadow to photos
-    document.querySelectorAll('.photo').forEach(el => {
-        el.style.borderColor = color + '55'; // add alpha
-        el.style.boxShadow = `0 0 14px ${color}44`;
-    });
-
-    // Apply color to music button
-    const btn = document.getElementById('musicBtn');
-    btn.style.color = color;
-    btn.style.borderColor = `rgba(${r},${g},${b},.45)`;
-    btn.style.boxShadow = `0 0 12px rgba(${r},${g},${b},.28)`;
-
-    // Apply background dynamic glow
-    document.getElementById('bg').style.background =
-        `radial-gradient(ellipse 70% 60% at 30% 40%, rgba(${r},${g},${b},.1), transparent),` +
-        `radial-gradient(ellipse 50% 70% at 70% 60%, rgba(${r},${g},${b},.06), transparent), #050505`;
+    // Hanya mengubah 2 variabel CSS di root (Sangat ringan)
+    document.documentElement.style.setProperty('--g-color', color);
+    document.documentElement.style.setProperty('--g-rgb', `${r}, ${g}, ${b}`);
 }
 
 // Ubah warna setiap 3 detik
@@ -97,8 +78,11 @@ setTimeout(() => {
     applyGlobalColor();
 }, 4400);
 
-/* ── MEMBUAT HUJAN TEKS (60 Elemen Teks) ── */
-for (let i = 0; i < 60; i++) {
+/* ── MEMBUAT HUJAN TEKS ── */
+const isMobileDevice = window.innerWidth < 768;
+const numTexts = isMobileDevice ? 20 : 60; // Kurangi jumlah untuk HP agar tidak lag
+
+for (let i = 0; i < numTexts; i++) {
     const el = document.createElement('div');
     el.className = 'text';
     el.innerText = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
@@ -175,6 +159,10 @@ document.addEventListener('touchmove', e => {
     }
     requestAnimationFrame(loop);
 })();
+
+// Set Dinamis Tahun Copyright
+const yearSpan = document.getElementById('year');
+if (yearSpan) yearSpan.innerText = new Date().getFullYear();
 
 
 /* ── INTERAKSI PANEL MUSIK ── */
