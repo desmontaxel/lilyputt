@@ -168,6 +168,7 @@ body {
     z-index: 3;
     transition: transform 0.3s ease;
     will-change: transform;
+    pointer-events: none;
 }
 
 .photo:hover {
