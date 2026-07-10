@@ -1,4 +1,4 @@
-# Lilyputt - Premium Romantic Aesthetic Website 🌸
+# Lilyputt🌸
 
 Lilyputt adalah sebuah halaman web interaktif (Single-Page Application) bergaya estetika romantis (Romantic Aesthetic). Web ini dilengkapi dengan efek 3D paralaks, animasi elemen berjatuhan (hujan teks dan foto), serta pemutar musik latar bawaan. Sangat cocok digunakan untuk mengabadikan memori, membuat kejutan romantis, atau sebagai portofolio kreatif.
 
