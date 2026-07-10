@@ -93,7 +93,7 @@ for (let i = 0; i < numTexts; i++) {
     const sz = (isMobile ? 6 : 9) + depth * (isMobile ? 12 : 18); // Ukuran font responsif
 
     el.style.cssText = `
-        left: ${Math.random() * 105}vw;
+        left: ${Math.random() * 90 + 5}vw;
         font-size: ${sz}px;
         opacity: ${0.1 + depth * 0.5};
         color: #ff6eb4;
@@ -117,7 +117,7 @@ for (let i = 0; i < PHOTOS.length; i++) {
 
     el.style.cssText = `
         width: ${sz}px; height: ${sz}px;
-        left: ${Math.random() * 100}vw;
+        left: ${Math.random() * 80 + 10}vw;
         opacity: ${0.3 + depth * 0.5};
         animation-duration: ${16 + Math.random() * 22}s;
         animation-delay: ${-Math.random() * 25}s;
