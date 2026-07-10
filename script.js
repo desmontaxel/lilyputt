@@ -8,9 +8,9 @@ const MESSAGES = [
 
 // NAMA FILE 15 FOTO (Placeholder)
 const PHOTOS = [
-    "foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg", "foto5.jpg",
-    "foto6.jpg", "foto7.jpg", "foto8.jpg", "foto9.jpg", "foto10.jpg",
-    "foto11.jpg", "foto12.jpg", "foto13.jpg", "foto14.jpg", "foto15.jpg"
+    "foto/foto1.jpg", "foto/foto2.jpg", "foto/foto3.jpg", "foto/foto4.jpg", "foto/foto5.jpg",
+    "foto/foto6.jpg", "foto/foto7.jpg", "foto/foto8.jpg", "foto/foto9.jpg", "foto/foto10.jpg",
+    "foto/foto11.jpg", "foto/foto12.jpg", "foto/foto13.jpg", "foto/foto14.jpg", "foto/foto15.jpg"
 ];
 
 /* ── WARNA GLOBAL (Glow Effect) ── */
